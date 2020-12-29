@@ -12,6 +12,7 @@ LatexLH = "5ba6fdca-9616-4e1b-a942-77ddac530f53"
 PrettyTables = "08abe8d2-0d0c-5749-adfa-8a2ac140af0d"
 
 [compat]
+Formatting = "0.4"
 julia = "^1"
 
 [extras]
