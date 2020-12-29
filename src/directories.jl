@@ -2,22 +2,23 @@
 const relBaseDir = 
 	joinpath("Documents", "projects", "p2019", "college_stratification");
 
-    """
+"""
 	$(SIGNATURES)
 
-Points to `college_stratification`.
-All project files are in this directory.
+Points to `college_stratification`. All project files are in this directory.
+
+Currently not relocatable.
 """
 function base_dir(computer :: Union{Symbol, Computer} = :current)
-	if isequal(computer, :current)
-		# Can construct even if the computer is not known
-		# This points to `src`
-		progDir = dirname(@__DIR__);
-		# Two up from `src`
-		return dirname(progDir);
-	else
+	# if isequal(computer, :current)
+	# 	# Can construct even if the computer is not known
+	# 	# This points to `src`. But note that once the package is `add`ed, this resides in `.julia`.
+	# 	progDir = dirname(@__DIR__);
+	# 	# Two up from `src`
+	# 	return dirname(progDir);
+	# else
 		return joinpath(home_dir(computer), relBaseDir)
-	end
+	# end
 end
 
 
@@ -93,18 +94,5 @@ function test_dir()
 	return joinpath(computer_out_dir(), "test_files")
 end
 
-
-# move to FilesLH +++++ (right_dirs)
-function parent_dirs(fPath :: AbstractString, nDirs :: Integer)
-    pV = splitpath(fPath);
-    n = length(pV);
-    if n > 1
-        idxV = max(1, n - nDirs) : (n - 1);
-        pd = joinpath(pV[idxV]...);
-    else
-        pd = "";
-    end
-    return pd
-end
 
 # -------

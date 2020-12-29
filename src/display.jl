@@ -8,9 +8,9 @@ settings_table(x) = Matrix{String}();
 """
 	$(SIGNATURES)
 
-This is used to write literals from nested objects into preambles.
+This is used to write literals from nested objects into preambles. Objects return `Vector{Vector{String}}` or `Vector{Tuple}`. Each entry contains (description, newcommand name, value).
 """
-settings_list(x, st) = Vector{String}();
+settings_list(x, st) = Vector{Vector{String}}();
 
 
 
@@ -125,7 +125,8 @@ end
 
 # Show a file name with `n` last directories
 function fpath_to_show(fPath :: String; nDirs :: Integer = 3)
-    s = parent_dirs(fPath, nDirs) * " - " * basename(fPath);
+    fDir, fName = splitdir(fPath);
+    s = right_dirs(fDir, nDirs) * " - " * fName;
     return s
 end
 

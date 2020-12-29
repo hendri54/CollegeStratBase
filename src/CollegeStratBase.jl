@@ -16,7 +16,7 @@ include("testing.jl");
 export Double, TimeInt, ncInt, TypeInt, CollInt, SchoolInt, GridInt
 
 # Directories
-export relBaseDir, base_dir, julia_dir, project_dir, paper_dir, test_dir, parent_dirs
+export relBaseDir, base_dir, julia_dir, project_dir, paper_dir, test_dir
 export computer_out_dir, computer_mat_dir, computer_log_dir, computer_json_dir, global_comparison_dir
 
 # Notation
