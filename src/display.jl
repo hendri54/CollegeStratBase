@@ -1,3 +1,18 @@
+"""
+	$(SIGNATURES)
+
+This is used to list settings for nested `ModelObject`s.
+"""
+settings_table(x) = Matrix{String}();
+
+"""
+	$(SIGNATURES)
+
+This is used to write literals from nested objects into preambles.
+"""
+settings_list(x, st) = Vector{String}();
+
+
 
 """
 $(SIGNATURES)

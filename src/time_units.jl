@@ -54,7 +54,11 @@ function hours_mtu_to_data(hours, timeUnit :: Symbol)
     return hours .* tf
 end
 
-# Convert hours per year to hours per week
+"""
+	$(SIGNATURES)
+
+Convert hours per year to hours per week.
+"""
 per_year_to_per_week(hours) = 
     hours ./ time_factor(:weeksPerYear);
 

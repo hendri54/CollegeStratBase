@@ -3,7 +3,7 @@ function notation_test()
         reload_symbol_table();
         st = symbol_table();
         @test lsymbol(:studyTime) isa String
-        @test description(:studyTime) isa String
+        @test ldescription(:studyTime) isa String
 
         fPath = joinpath(test_dir(), "notation_preamble_test.tex");
         isfile(fPath)  &&  rm(fPath);
