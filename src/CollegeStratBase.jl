@@ -20,7 +20,7 @@ export relBaseDir, base_dir, julia_dir, project_dir, paper_dir, test_dir, parent
 export computer_out_dir, computer_mat_dir, computer_log_dir, computer_json_dir, global_comparison_dir
 
 # Notation
-export SymTable, symbol_table, reload_symbol_table, lsymbol, ldescription
+export SymTable, symbol_table, reload_symbol_table, lsymbol, ldescription, symbol_entry
 export write_notation_preamble, notation_preamble_path, write_notation_summary
 
 # Display

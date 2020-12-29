@@ -44,6 +44,22 @@ ldescription(name :: Symbol) = LatexLH.description(symbol_table(), name);
 """
 	$(SIGNATURES)
 
+Make an entry for a symbol. Returns a vector with (description, newcommand name, numerical value).
+
+# Example
+```
+symbol_entry(st, :workTime, 1.2) == ("Work time", "workTimeV", 1.2)
+```
+"""
+function symbol_entry(st :: SymbolTable, sName :: Symbol, value)
+    si = st[sName];
+    return LatexLH.description(si), "$(si.name)V", value
+end
+
+
+"""
+	$(SIGNATURES)
+
 Write preamble with newcommand statements that define notation for the paper.
 Calls `symbol_table` to make code revisions easier.
 """

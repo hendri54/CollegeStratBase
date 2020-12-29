@@ -4,6 +4,10 @@ function notation_test()
         st = symbol_table();
         @test lsymbol(:studyTime) isa String
         @test ldescription(:studyTime) isa String
+        descr, cmd, v = symbol_entry(st, :studyTime, 0.55);
+        @test descr == ldescription(:studyTime)
+        @test cmd == "studyTimeV"
+        @test v == 0.55
 
         fPath = joinpath(test_dir(), "notation_preamble_test.tex");
         isfile(fPath)  &&  rm(fPath);
