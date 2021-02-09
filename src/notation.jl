@@ -72,6 +72,7 @@ function write_notation_preamble(; fPath = notation_preamble_path())
         write_preamble(io, st);
     end
     println("Done");
+    return fPath
 end
 
 notation_preamble_path() = joinpath(paper_dir(), "notation_preamble.tex");

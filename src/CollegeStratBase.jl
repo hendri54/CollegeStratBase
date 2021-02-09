@@ -22,6 +22,7 @@ export computer_out_dir, computer_mat_dir, computer_log_dir, computer_json_dir, 
 # Notation
 export SymTable, symbol_table, reload_symbol_table, lsymbol, ldescription, symbol_entry
 export write_notation_preamble, notation_preamble_path, write_notation_summary
+export RegrIntercept
 
 # Display
 export format_number, format_dollars, format_vector, chain_strings
