@@ -43,9 +43,9 @@ end
 
 # Files for the paper live here
 paper_dir(computer :: Union{Symbol, Computer} = :current) = 
-	joinpath(project_dir(computer),  "paper");
-
-    """
+	joinpath(dropbox_dir(), "lutz", "paper");
+	
+"""
 	$(SIGNATURES)
 
 Base directory for all output files.
@@ -93,6 +93,14 @@ end
 function test_dir()
 	return joinpath(computer_out_dir(), "test_files")
 end
+
+
+## -----------  Files needed for paper
+# Live in Dropbox
+
+dropbox_dir() = "/Users/lutz/Dropbox/Dropout Policies";
+
+notation_dir() = joinpath(dropbox_dir(), "lutz", "notation");
 
 
 # -------

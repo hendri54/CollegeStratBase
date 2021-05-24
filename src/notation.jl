@@ -9,7 +9,11 @@ Flow when modifying notation:
 4. `write_notation_summary()`
 
 Typeset `model_notation.lyx`
+
+Since the notation material is also used in the paper (written by Oksana), all of these files live in Dropbox.
 =#
+
+const GpaLabel = "AFQT";
 
 # This holds a copy of the symbol table, so it need not be reloaded all the time.
 const SymTable = SymbolTable();
@@ -18,7 +22,7 @@ const SymTable = SymbolTable();
 """
 	$(SIGNATURES)
 
-Returns `SymbolTable` with notation. If `SymTable` is populated, returns it. Otherwise reads a CSV file that is hand-written.
+Returns `SymbolTable` with notation. If `SymTable` is populated, returns it. Otherwise reads a CSV file.
 
 This will be used by `write_notation_preamble`.
 
@@ -33,7 +37,7 @@ end
 
 function reload_symbol_table()
     LatexLH.erase!(SymTable);
-    load_from_csv!(SymTable, joinpath(paper_dir(), "notation_table.csv"));
+    load_from_csv!(SymTable, joinpath(notation_dir(), "notation_table.csv"));
 end
 
 # Latex symbol by name
@@ -75,7 +79,7 @@ function write_notation_preamble(; fPath = notation_preamble_path())
     return fPath
 end
 
-notation_preamble_path() = joinpath(paper_dir(), "notation_preamble.tex");
+notation_preamble_path() = joinpath(notation_dir(), "notation_preamble.tex");
 
 """
 	$(SIGNATURES)
@@ -91,6 +95,6 @@ function write_notation_summary(; fPath = notation_summary_path())
     println("Done");
 end
 
-notation_summary_path() = joinpath(paper_dir(), "notation_summary.tex");
+notation_summary_path() = joinpath(notation_dir(), "notation_summary.tex");
 
 # ------------
