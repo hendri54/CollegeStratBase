@@ -37,7 +37,22 @@ end
 
 function reload_symbol_table()
     LatexLH.erase!(SymTable);
-    load_from_csv!(SymTable, joinpath(notation_dir(), "notation_table.csv"));
+    copy_symbol_table_from_dropbox();
+    load_from_csv!(SymTable, sym_table_path());
+end
+
+sym_table_path(computer = :current) = 
+    joinpath(notation_dir(computer), "notation_table.csv");
+
+# Symbol table is hand-edited in a Dropbox dir. Needs to imported periodically.
+function copy_symbol_table_from_dropbox()
+    if !is_remote(get_computer(:current))
+        tgDir = notation_dir();
+        isdir(tgDir)  ||  mkpath(tgDir);
+        srcPath = joinpath(dropbox_dir(), "lutz", "notation", "notation_table.csv");
+        @assert isfile(srcPath)  "Not found: $srcPath";
+        cp(srcPath, sym_table_path(); force = true);
+    end
 end
 
 # Latex symbol by name
