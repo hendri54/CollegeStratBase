@@ -131,9 +131,19 @@ function fpath_to_show(fPath :: String; nDirs :: Integer = 3)
 end
 
 
-
 # Display calibrated if true and fixed if false
-calibrated_string(x :: Bool) = 
-    x  ?  "calibrated"  :  "fixed";
+function calibrated_string(isCal :: Bool; fixedValue = nothing) 
+    if isCal
+        x = "calibrated"
+    else
+        if isnothing(fixedValue)
+            valStr = "";
+        else
+            valStr = " with value $fixedValue";
+        end
+        x = "fixed" * valStr;
+    end
+    return x
+end
 
 # --------------
