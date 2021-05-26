@@ -80,15 +80,21 @@ end
 	$(SIGNATURES)
 
 Write preamble with newcommand statements that define notation for the paper.
+Writes to a local directory so that code can run on the cluster.
 Calls `symbol_table` to make code revisions easier.
 """
-function write_notation_preamble(; fPath = notation_preamble_path())
+function write_notation_preamble(; fPath = notation_preamble_path(),
+    copyToDropbox = false)
     st = symbol_table(forceReload = true);
     # fPath = notation_preamble_path();
     println("Writing notation preamble to ", fpath_to_show(fPath));
     make_dir(fPath);
     open(fPath, "w") do io
         write_preamble(io, st);
+    end
+    if copyToDropbox  &&  !is_remote(:current)
+        tgPath = joinpath(notation_copy_dir(), "notation_preamble.tex");
+        cp(fPath, tgPath; force = true);
     end
     println("Done");
     return fPath
@@ -100,12 +106,18 @@ notation_preamble_path() = joinpath(notation_dir(), "notation_preamble.tex");
 	$(SIGNATURES)
 
 Write a tex file that lists notation. To be included in another document as a Section.
+Writes to a local directory so that code can run on the cluster.
 """
-function write_notation_summary(; fPath = notation_summary_path())
+function write_notation_summary(; fPath = notation_summary_path(),
+    copyToDropbox = false)
     println("Writing notation summary to ", fpath_to_show(fPath));
     make_dir(fPath);
     open(fPath, "w") do io
         write_notation_tex(io, symbol_table(forceReload = true));
+    end
+    if copyToDropbox  &&  !is_remote(:current)
+        tgPath = joinpath(notation_copy_dir(), "notation_summary.tex");
+        cp(fPath, tgPath; force = true);
     end
     println("Done");
 end

@@ -100,6 +100,13 @@ end
 
 dropbox_dir(computer = :current) = "/Users/lutz/Dropbox/Dropout Policies";
 
+
+"""
+	$(SIGNATURES)
+
+Directory where notation files (e.g. notation preamble) are stored.
+Local dir, so it works on server.
+"""
 function notation_dir(computer = :current)
 	# if is_remote(computer)
 		pDir = joinpath(project_dir(computer), "notation");
@@ -108,7 +115,27 @@ function notation_dir(computer = :current)
 	# end
 	return pDir
 end
-	# joinpath(dropbox_dir(computer), "lutz", "notation");
+
+notation_copy_dir(computer = :current) = 
+	joinpath(dropbox_dir(computer), "lutz", "notation");
+
+
+"""
+	$(SIGNATURES)
+
+Copy a file, given by a relative path, from `srcDir` to `tgDir`.
+Make `tgDir` if needed.
+"""
+function copy_file(fPath :: AbstractString, srcDir :: AbstractString, tgDir)
+    srcPath = joinpath(srcDir, fPath);
+    tgPath = joinpath(tgDir, fPath);
+    if isfile(srcPath)
+        make_dir(tgPath);
+        cp(srcPath, tgPath; force = true);
+    else
+        @warn "Source file not found: $fPath"
+    end
+end
 
 
 # -------

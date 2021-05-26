@@ -22,8 +22,9 @@ export AbstractSchoolGroups, Schooling3
 export ed_idx, ed_label, ed_labels, ed_symbol, ed_symbols, ed_suffixes, ed_suffix, n_school
 
 # Directories
-export relBaseDir, base_dir, julia_dir, project_dir, paper_dir, test_dir
+export relBaseDir, base_dir, julia_dir, notation_dir, notation_copy_dir, project_dir, paper_dir, test_dir
 export computer_out_dir, computer_mat_dir, computer_log_dir, computer_json_dir, global_comparison_dir
+export copy_file
 
 # Notation
 export SymTable, symbol_table, reload_symbol_table, lsymbol, ldescription, symbol_entry, copy_symbol_table_from_dropbox
