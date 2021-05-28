@@ -22,4 +22,27 @@ function present_value(xV, R)
     return pv
 end
 
+
+# Save anything that can be `print`ed to a text file.
+function save_text_file(fPath, txtV :: AbstractVector)
+    open(fPath, "w") do io
+        for txt in txtV
+            println(io, txt);
+        end
+    end
+    showPath = fpath_to_show(fPath);
+    println("Saved  $showPath");
+end
+
+
+"""
+	$(SIGNATURES)
+
+Legend for data versus model.
+Small so that it does not cover graph.        
+"""
+data_model_labels() = ["D" "M"];
+
+
+
 # ----------------

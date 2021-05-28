@@ -42,7 +42,7 @@ export model_to_data_courses, data_to_model_courses
 export dollars_data_to_model, dollars_model_to_data
 
 # Helpers
-export present_value, pv_factor
+export present_value, pv_factor, save_text_file, data_model_labels
 
 # Debugging
 export dbgLow, dbgMedium, dbgHigh
