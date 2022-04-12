@@ -1,3 +1,26 @@
+# Generating reproducible random numbers
+CustomRNG(seed) = StableRNG(seed);
+
+
+"""
+	$(SIGNATURES)
+
+Copy a file, given by a relative path, from `srcDir` to `tgDir`.
+Make `tgDir` if needed.
+"""
+function copy_file(fPath :: AbstractString, srcDir :: AbstractString, tgDir)
+    srcPath = joinpath(srcDir, fPath);
+    tgPath = joinpath(tgDir, fPath);
+    if isfile(srcPath)
+        make_dir(tgPath);
+        cp(srcPath, tgPath; force = true);
+    else
+        @warn "Source file not found: $fPath"
+    end
+end
+
+
+
 """
 	$(SIGNATURES)
 

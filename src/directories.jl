@@ -1,3 +1,6 @@
+# +++++
+# Removed export. Make into project specific package.
+
 # Basedir is expected at this location relative to home for file transfer
 const relBaseDir = 
 	joinpath("Documents", "projects", "p2019", "college_stratification");
@@ -14,14 +17,14 @@ function base_dir(computer :: Union{Symbol, Computer} = :current)
 end
 
 
-"""
-	$(SIGNATURES)
+# """
+# 	$(SIGNATURES)
 
-Directory for Julia shared code. Perhaps not needed?
-"""
-function julia_dir(computer :: Union{Symbol, Computer} = :current)
-	return joinpath(home_dir(computer),  "Documents",  "julia")
-end
+# Directory for Julia shared code. Perhaps not needed?
+# """
+# function julia_dir(computer :: Union{Symbol, Computer} = :current)
+# 	return joinpath(home_dir(computer),  "Documents",  "julia")
+# end
 
 """
 	$(SIGNATURES)
@@ -119,23 +122,6 @@ end
 notation_copy_dir(computer = :current) = 
 	joinpath(dropbox_dir(computer), "lutz", "notation");
 
-
-"""
-	$(SIGNATURES)
-
-Copy a file, given by a relative path, from `srcDir` to `tgDir`.
-Make `tgDir` if needed.
-"""
-function copy_file(fPath :: AbstractString, srcDir :: AbstractString, tgDir)
-    srcPath = joinpath(srcDir, fPath);
-    tgPath = joinpath(tgDir, fPath);
-    if isfile(srcPath)
-        make_dir(tgPath);
-        cp(srcPath, tgPath; force = true);
-    else
-        @warn "Source file not found: $fPath"
-    end
-end
 
 
 # -------

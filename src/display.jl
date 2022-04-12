@@ -3,7 +3,7 @@
 
 This is used to list settings for nested `ModelObject`s.
 """
-settings_table(x) = Matrix{String}();
+settings_table(x) = Matrix{String}(undef, 0, 0);
 
 """
 	$(SIGNATURES)
@@ -26,15 +26,8 @@ end
 
 
 # Given a vector of things that can be converted to string, return a string of the form "abc_def_dhi" with connector character `linkChar`
-function chain_strings(v :: AbstractVector{T}, linkStr = "_") where T
-    s = string(v[1]);
-    if length(v) > 1
-        for j = 2 : length(v)
-            s = s * string(linkStr) * string(v[j])
-        end
-    end
-    return s
-end
+chain_strings(v :: AbstractVector{T}, linkStr = "_") where T = 
+    join(v, linkStr);
 
 chain_strings(v :: AbstractString, linkStr = "_") = v;
 
@@ -131,19 +124,28 @@ function fpath_to_show(fPath :: String; nDirs :: Integer = 3)
 end
 
 
-# Display calibrated if true and fixed if false
-function calibrated_string(isCal :: Bool; fixedValue = nothing) 
-    if isCal
-        x = "calibrated"
-    else
-        if isnothing(fixedValue)
-            valStr = "";
-        else
-            valStr = " with value $fixedValue";
-        end
-        x = "fixed" * valStr;
-    end
-    return x
-end
+# # Display calibrated if true and fixed if false
+# function calibrated_string(isCal :: Bool; fixedValue = nothing) 
+#     if isCal
+#         x = "calibrated"
+#     else
+#         if isnothing(fixedValue)
+#             valStr = "fixed";
+#         else
+#             valStr = "fixed at $fixedValue";
+#         end
+#     end
+#     return x
+# end
+
+# function calibrated_string(p :: Param)
+#     calibrated_string(is_calibrated(p); fixedValue = default_value(p));
+# end
+
+# function calibrated_string(pv :: ParamVector, vName :: Symbol)
+#     calibrated_string(retrieve(pv, vName));
+# end
+
+# StructLH.describe(switches :: ModelSwitches) = 
 
 # --------------

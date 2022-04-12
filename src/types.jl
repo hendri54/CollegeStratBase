@@ -2,13 +2,13 @@ const Double = Float64
 # For no of courses
 const ncInt = UInt8
 # For time variables
-const TimeInt = UInt8
+const TimeInt = Int
 # For indexing types
-const TypeInt = UInt16
+const TypeInt = Int
 # For indexing colleges
-const CollInt = UInt8
+const CollInt = Int
 # For indexing school levels
-const SchoolInt = UInt8
+const SchoolInt = Int
 # For indexing grid points
 const GridInt = UInt16
 

@@ -1,7 +1,7 @@
 module CollegeStratBase
 
-using Dates, DocStringExtensions, Formatting, PrettyTables
-using FilesLH, LatexLH, StructLH
+using Dates, DocStringExtensions, Formatting, PrettyTables, StableRNGs;
+using FilesLH, LatexLH, ModelParams, StructLH
 
 include("types.jl");
 include("constants.jl");
@@ -17,14 +17,17 @@ include("testing.jl");
 # Types
 export Double, TimeInt, ncInt, TypeInt, CollInt, SchoolInt, GridInt
 
+# Colleges
+export n_colleges;
+
 # School groups
 export AbstractSchoolGroups, Schooling3
 export ed_idx, ed_label, ed_labels, ed_symbol, ed_symbols, ed_suffixes, ed_suffix, n_school
 
 # Directories
-export relBaseDir, base_dir, julia_dir, notation_dir, notation_copy_dir, project_dir, paper_dir, test_dir
-export computer_out_dir, computer_mat_dir, computer_log_dir, computer_json_dir, global_comparison_dir
-export copy_file
+# export relBaseDir, base_dir, notation_dir, notation_copy_dir, project_dir, paper_dir;
+# export computer_out_dir, computer_mat_dir, computer_log_dir, computer_json_dir, global_comparison_dir
+export copy_file, test_dir
 
 # Notation
 export SymTable, symbol_table, reload_symbol_table, lsymbol, ldescription, symbol_entry, copy_symbol_table_from_dropbox
@@ -33,7 +36,7 @@ export RegrIntercept, GpaLabel
 
 # Display
 export format_number, format_dollars, format_vector, chain_strings
-export current_time, show_text_table, show_matrix, fpath_to_show, calibrated_string
+export current_time, show_text_table, show_matrix, fpath_to_show;
 export settings_list, settings_table
 
 # Unit conversions
@@ -42,12 +45,16 @@ export model_to_data_courses, data_to_model_courses
 export dollars_data_to_model, dollars_model_to_data
 
 # Helpers
-export present_value, pv_factor, save_text_file, data_model_labels
+export present_value, pv_factor, save_text_file, data_model_labels;
+export CustomRNG;
 
 # Debugging
 export dbgLow, dbgMedium, dbgHigh
 
 # Testing
 export test_header, test_divider
+
+# Stub
+n_colleges(x) = nothing;
 
 end # module
