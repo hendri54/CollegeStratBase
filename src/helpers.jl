@@ -67,5 +67,11 @@ Small so that it does not cover graph.
 data_model_labels() = ["D" "M"];
 
 
+# Points to CollegeStratBase dir
+pkg_dir() = normpath(joinpath(@__DIR__, ".."));
+
+# For test files created by this package only.
+test_file_dir() = joinpath(pkg_dir(), "test_files");
+
 
 # ----------------

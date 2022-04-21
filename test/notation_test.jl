@@ -1,23 +1,23 @@
+using CollegeStratBase, Test;
+mdl = CollegeStratBase;
+
 function notation_test()
     @testset "Notation" begin
-        reload_symbol_table();
+        testDir = mdl.test_file_dir();
+        # CSV file with notation for testing. Hand written.
+        stPath = joinpath(testDir, "notation_table.csv");
+        @test isfile(stPath);
+
+        reload_symbol_table(stPath);
         st = symbol_table();
-        @test lsymbol(:studyTime) isa String
-        @test ldescription(:studyTime) isa String
-        descr, cmd, v = symbol_entry(st, :studyTime, 0.55);
-        @test descr == ldescription(:studyTime)
-        @test cmd == "studyTimeV"
-        @test v == 0.55
 
-        fPath = joinpath(test_dir(), "notation_preamble_test.tex");
-        isfile(fPath)  &&  rm(fPath);
-        write_notation_preamble(fPath = fPath);
-        @test isfile(fPath);
-
-        fPath = joinpath(test_dir(), "notation_summary_test.tex");
-        isfile(fPath)  &&  rm(fPath);
-        write_notation_summary(fPath = fPath);
-        @test isfile(fPath);
+        sName = :abil;
+        @test lsymbol(sName) isa String;
+        @test ldescription(sName) isa String;
+        descr, cmd, v = symbol_entry(st, sName, 0.55);
+        @test descr == ldescription(sName);
+        @test cmd == "abilV";
+        @test v == 0.55;
 	end
 end
 

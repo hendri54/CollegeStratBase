@@ -30,8 +30,7 @@ export ed_idx, ed_label, ed_labels, ed_symbol, ed_symbols, ed_suffixes, ed_suffi
 export copy_file, test_dir
 
 # Notation
-export SymTable, symbol_table, reload_symbol_table, lsymbol, ldescription, symbol_entry, copy_symbol_table_from_dropbox
-export write_notation_preamble, notation_preamble_path, write_notation_summary
+export SymTable, symbol_table, reload_symbol_table, lsymbol, ldescription, symbol_entry; # , copy_symbol_table_from_dropbox
 export RegrIntercept, GpaLabel
 
 # Display
