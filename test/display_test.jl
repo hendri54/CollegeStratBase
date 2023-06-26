@@ -9,7 +9,7 @@ function format_number_test()
         @test startswith(y, "123.4")
 
         y = format_number(0.0012345);
-        @test startswith(y, "0.00123")
+        @test startswith(y, "0.00123");
     end
 end
 

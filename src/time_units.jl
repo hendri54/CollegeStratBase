@@ -1,4 +1,6 @@
 # Time units
+export AbstractTimeUnit, TuYear, TuMonth, TuWeek, TuDay, TuHour;
+export time_factor;
 
 
 ## --------------  Endowments
@@ -10,6 +12,22 @@ const weeksPerYear = 52
 const daysPerYear = 365
 const hoursPerWeek = 112
 const hoursPerYear = hoursPerWeek * weeksPerYear;
+
+
+abstract type AbstractTimeUnit end;
+struct TuYear <: AbstractTimeUnit end;
+struct TuMonth <: AbstractTimeUnit end;
+struct TuWeek <: AbstractTimeUnit end;
+struct TuDay <: AbstractTimeUnit end;
+struct TuHour <: AbstractTimeUnit end;
+
+# Multiply dollar values by this factor to make it annual
+time_factor(::TuYear) = 1;
+time_factor(::TuMonth) = 12;
+time_factor(::TuWeek) = weeksPerYear;
+time_factor(::TuDay) = daysPerYear;
+time_factor(::TuHour) = hoursPerYear;
+    
 
 
 ## ------------  Convert data to model time units
@@ -44,12 +62,12 @@ end
 
 Convert arbitrary data hours into model time units.
 """
-function hours_data_to_mtu(hours, timeUnit :: Symbol)
+function hours_data_to_mtu(hours, timeUnit)
     tf = time_factor(timeUnit);
     return hours ./ tf
 end
 
-function hours_mtu_to_data(hours, timeUnit :: Symbol)
+function hours_mtu_to_data(hours, timeUnit)
     tf = time_factor(timeUnit);
     return hours .* tf
 end
@@ -60,7 +78,7 @@ end
 Convert hours per year to hours per week.
 """
 per_year_to_per_week(hours) = 
-    hours ./ time_factor(:weeksPerYear);
+    hours ./ weeksPerYear;
 
 
 ## -------------  Validate model time units
@@ -79,6 +97,17 @@ function validate_mtu(mtu)
     end
     return nothing
 end
+
+
+## --------------  Money units
+
+abstract type AbstractDollars end
+struct DataDollars{TU} <: AbstractDollars end
+struct ModelDollars{TU} <: AbstractDollars end
+
+const MDollars = ModelDollars{TuYear};
+const DDollars = DataDollars{TuYear};
+
 
 
 # -----------

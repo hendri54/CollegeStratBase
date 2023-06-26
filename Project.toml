@@ -1,7 +1,7 @@
 name = "CollegeStratBase"
 uuid = "bfa38a7c-6709-4380-90e8-18b172effef4"
 authors = ["hendri54 <hendricksl@protonmail.com>"]
-version = "1.1"
+version = "1.3"
 
 [deps]
 Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
@@ -15,9 +15,10 @@ StableRNGs = "860ef19b-820b-49d6-a774-d7a799459cd3"
 StructLH = "10801879-faf9-5fee-b4da-d4f48ef6194b"
 
 [compat]
-DocStringExtensions = "0.8"
+DocStringExtensions = "0.8, 0.9"
+FilesLH = "1"
 Formatting = "0.4"
-PrettyTables = "0.12, 1"
+PrettyTables = "0.12, 1, 2"
 StableRNGs = "1"
 julia = "^1.5"
 

@@ -1,3 +1,4 @@
+
 const Double = Float64
 # For no of courses
 const ncInt = UInt8
@@ -11,5 +12,9 @@ const CollInt = Int
 const SchoolInt = Int
 # For indexing grid points
 const GridInt = UInt16
+
+abstract type AbstractModelDataUnits end;
+struct ModelUnits <: AbstractModelDataUnits end;
+struct DataUnits <: AbstractModelDataUnits end;
 
 # ------------

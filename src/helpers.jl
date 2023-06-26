@@ -47,14 +47,14 @@ end
 
 
 # Save anything that can be `print`ed to a text file.
-function save_text_file(fPath, txtV :: AbstractVector)
-    open(fPath, "w") do io
+function save_text_file(fPath, txtV :: AbstractVector; io = nothing)
+    open(fPath, "w") do ioWrite
         for txt in txtV
-            println(io, txt);
+            println(ioWrite, txt);
         end
     end
     showPath = fpath_to_show(fPath);
-    println("Saved  $showPath");
+    isnothing(io)  ||  println(io, "Saved  $showPath");
 end
 
 

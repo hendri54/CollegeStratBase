@@ -45,8 +45,10 @@ end
 # end
 
 # Latex symbol by name
-lsymbol(name :: Symbol) = latex(symbol_table(), name);
-ldescription(name :: Symbol) = LatexLH.description(symbol_table(), name);
+lsymbol(name :: Symbol; defaultValue = string(name)) = 
+    LatexLH.latex(symbol_table(), name; defaultValue);
+ldescription(name :: Symbol; defaultValue = string(name)) = 
+    LatexLH.description(symbol_table(), name; defaultValue);
 
 
 """

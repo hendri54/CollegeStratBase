@@ -10,4 +10,9 @@ const dbgHigh = true
 # Name of the constant term in regressions
 const RegrIntercept = :cons
 
+
+## ------------  Figures
+
+const FigExtension = "pdf";
+
 # ------------

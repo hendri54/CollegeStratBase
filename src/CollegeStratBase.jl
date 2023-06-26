@@ -3,16 +3,8 @@ module CollegeStratBase
 using Dates, DocStringExtensions, Formatting, PrettyTables, StableRNGs;
 using FilesLH, LatexLH, ModelParams, StructLH
 
-include("types.jl");
-include("constants.jl");
-include("helpers.jl");
-include("school_groups.jl");
-include("directories.jl");
-include("notation.jl");
-include("time_units.jl");
-include("unit_conversions.jl");
-include("display.jl");
-include("testing.jl");
+# Constants
+export FigExtension;
 
 # Types
 export Double, TimeInt, ncInt, TypeInt, CollInt, SchoolInt, GridInt
@@ -34,14 +26,20 @@ export SymTable, symbol_table, reload_symbol_table, lsymbol, ldescription, symbo
 export RegrIntercept, GpaLabel
 
 # Display
-export format_number, format_dollars, format_vector, chain_strings
+export format_number, format_dollars, format_model_dollars, format_vector, chain_strings
 export current_time, show_text_table, show_matrix, fpath_to_show;
 export settings_list, settings_table
 
 # Unit conversions
+export ModelUnits, DataUnits, AbstractModelDataUnits;
 export hours_per_week_to_mtu, hours_data_to_mtu, hours_mtu_to_data, validate_mtu, mtu_to_hours_per_week, per_year_to_per_week
-export model_to_data_courses, data_to_model_courses
-export dollars_data_to_model, dollars_model_to_data
+export model_to_data_courses, data_to_model_courses;
+export check_dollar_values;
+export dollars_data_to_model, dollars_model_to_data, dollars_data_to_model!, dollars_model_to_data!;
+export dollars_to_data_units, dollars_to_model_units;
+export dollar_factor, dollar_convert, dollar_convert!, d2m, m2d;
+export ModelDollars, DataDollars, MDollars, DDollars;
+
 
 # Helpers
 export present_value, pv_factor, save_text_file, data_model_labels;
@@ -55,5 +53,18 @@ export test_header, test_divider
 
 # Stub
 n_colleges(x) = nothing;
+
+
+include("types.jl");
+include("constants.jl");
+include("helpers.jl");
+include("school_groups.jl");
+include("directories.jl");
+include("notation.jl");
+include("time_units.jl");
+include("unit_conversions.jl");
+include("display.jl");
+include("testing.jl");
+
 
 end # module

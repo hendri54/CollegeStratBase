@@ -35,21 +35,6 @@ chain_strings(v :: AbstractString, linkStr = "_") = v;
 """
 $(SIGNATURES)
 
-Format a vector of numbers with a header. Output is a string.
-"""
-function format_vector(headerStr, numberV, nDigits :: Integer)
-    roundV = round.(numberV, digits = nDigits);
-    if isempty(headerStr)
-        return "$roundV"
-    else
-        return headerStr * ":  $roundV"
-    end
-end
-
-
-"""
-$(SIGNATURES)
-
 Show a text table.
 """
 function show_text_table(tbM; io = stdout)
@@ -80,6 +65,23 @@ ndigits :: Integer) where F1 <: AbstractFloat
 end
 
 
+## --------------  Format numbers
+
+"""
+$(SIGNATURES)
+
+Format a vector of numbers with a header. Output is a string.
+"""
+function format_vector(headerStr, numberV, nDigits :: Integer)
+    roundV = round.(numberV, digits = nDigits);
+    if isempty(headerStr)
+        return "$roundV"
+    else
+        return headerStr * ":  $roundV"
+    end
+end
+
+
 ## Format a single number in easy to read format.
 function format_number(x :: Number; format :: Symbol = :default)
     if format == :dollars
@@ -93,14 +95,20 @@ function format_number(x :: Number; format :: Symbol = :default)
     end
 end
 
+format_number(x :: Missing; format :: Symbol = :default) = "na";
+# format_number(x :: NaN; format :: Symbol = :default) = "NaN";
 
 ## Format a number for display in a table
 function format_number_default(x :: Number)
     absX = abs(x);
-    if absX > 1e3
+    if isnan(x)
+        y = "NaN";
+    elseif absX > 1e3
         y = format(x, precision = 1, commas = true);
     elseif absX > 1
         y = format(x, precision = 2, commas = false);
+    elseif absX > 0.1
+        y = format(x, precision = 3, commas = false);
     elseif absX > 0.01
         y = format(x, precision = 4);
     else
@@ -113,6 +121,19 @@ end
 ## Format a dollar number
 function format_dollars(x; decimals = 0)
     format(x, precision = decimals, commas = true);
+end
+
+function format_model_dollars(x :: Number; decimals = 0)
+    format_dollars(m2d(x); decimals)
+end
+
+"""
+	$(SIGNATURES)
+
+Format a vector of model dollars to show data dollar amounts. Output is a single string.
+"""
+function format_model_dollars(x :: AbstractVector; decimals = 0)
+    return join(map(d -> format_model_dollars(d; decimals), x), " | ")
 end
 
 

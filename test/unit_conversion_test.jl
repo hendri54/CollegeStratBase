@@ -14,13 +14,45 @@ function dollars_test()
 		mDollars = dollars_data_to_model(dDollars, :perYear);
         dDollars2 = dollars_model_to_data(mDollars, :perYear);
         @test isapprox(dDollars, dDollars2)
+        @test isapprox(mDollars, dollars_data_to_model(dDollars, TuYear()));
+        @test isapprox(dDollars, dollars_model_to_data(mDollars, TuYear()));
+
+        @test isapprox(mDollars, dollar_convert(dDollars, DDollars(), MDollars()));
+        @test isapprox(dDollars, dollar_convert(dDollars, DDollars(), DDollars()));
+        @test isapprox(dollar_factor(DDollars(), DDollars()), 1.0);
+        v = [dDollars];
+        dollar_convert!(v, DDollars(), MDollars());
+        @test isapprox(only(v), mDollars);
 
 		mDollars3 = dollars_data_to_model(dDollars, :perDay);
 		@test mDollars3 > 300 * mDollars
 		dDollars3 = dollars_model_to_data(mDollars3, :perDay);
 		@test dDollars3 ≈ dDollars
+
+        mDollarV = [1.2, 2.3];
+        tUnit = TuMonth();
+        dDollarV = dollars_model_to_data(mDollarV, tUnit);
+        @test isapprox(dollars_data_to_model(dDollarV, tUnit), mDollarV);
+        @test isapprox(dDollarV, 
+            dollars_to_data_units(ModelUnits(), mDollarV, tUnit));
+        dDollar2V = copy(mDollarV);
+        dollars_model_to_data!(dDollar2V, tUnit);
+        @test isapprox(dDollarV, dDollar2V);
+        dollars_data_to_model!(dDollar2V, tUnit);
+        @test isapprox(dDollar2V, mDollarV);
+        @test isapprox(mDollarV, 
+            dollars_to_model_units(DataUnits(), dDollarV, tUnit));
+        @test isapprox(mDollarV, 
+            dollars_to_model_units(ModelUnits(), mDollarV, tUnit));
+
+        @test check_dollar_values(DataUnits(), [1000.0, 2000.0], 500.0, 3000.0);
+        @test !check_dollar_values(ModelUnits(), [1000.0, 2000.0], 500.0, 3000.0);
+        @test check_dollar_values(ModelUnits(), 
+            dollars_data_to_model([1000.0, 2000.0], TuYear()), 500.0, 3000.0);
+        @test !check_dollar_values(ModelUnits(), [1000.0, 2000.0], 500.0, 3000.0);
 	end
 end
+
 
 function time_units_test()
     @testset "Time units" begin
